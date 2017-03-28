@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import './App.css';
 import Checkbox from "./components/Checkbox";
+import Select from "./components/Select";
 
 class App extends Component {
 
@@ -91,17 +92,14 @@ class App extends Component {
             <input type="text" id="password-input" readOnly value={password}/>
             <button onClick={this.handleButtonClick}>Generate another</button>
           </div>
-          <div>
-            <label htmlFor="password-length">Password Length:</label>
-            <select
-              id="password-length"
-              name="password-length"
-              value={passwordLength}
-              onChange={this.handleSelectChange}
-            >
-              {passwordLenghts.map(item => <option key={item} value={item}>{item}</option>)}
-            </select>
-          </div>
+          <Select
+            name="password-length"
+            label="Password Length:"
+            value={passwordLength}
+            onChange={this.handleSelectChange}
+          >
+            {passwordLenghts.map(item => <option key={item} value={item}>{item}</option>)}
+          </Select>
           <div>
             <Checkbox
               name="include-uppercase-chars-checkbox"
