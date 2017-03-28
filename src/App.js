@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import './App.css';
+import Checkbox from "./components/Checkbox";
 
 class App extends Component {
 
@@ -102,38 +103,30 @@ class App extends Component {
             </select>
           </div>
           <div>
-            <label htmlFor="include-uppercase-chars-checkbox">
-              <input
-                type="checkbox"
-                id="include-uppercase-chars-checkbox"
-                checked={includeUppercaseChars}
-                onChange={this.handleCheckboxChange('includeUppercaseChars')}
-              /> Upper-case
-            </label>
-            <label htmlFor="include-lowercase-chars-checkbox">
-              <input
-                type="checkbox"
-                id="include-lowercase-chars-checkbox"
-                checked={includeLowercaseChars}
-                onChange={this.handleCheckboxChange('includeLowercaseChars')}
-              /> Lower-case
-            </label>
-            <label htmlFor="include-numbers-checkbox">
-              <input
-                type="checkbox"
-                id="include-numbers-checkbox"
-                checked={includeNumbers}
-                onChange={this.handleCheckboxChange('includeNumbers')}
-              /> Numbers
-            </label>
-            <label htmlFor="include-special-chars-checkbox">
-              <input
-                type="checkbox"
-                id="include-special-chars-checkbox"
-                checked={includeSpecialChars}
-                onChange={this.handleCheckboxChange('includeSpecialChars')}
-              /> Special
-            </label>
+            <Checkbox
+              name="include-uppercase-chars-checkbox"
+              label="Upper-case"
+              value={includeUppercaseChars}
+              onChange={this.handleCheckboxChange('includeUppercaseChars')}
+            />
+            <Checkbox
+              name="include-lowercase-chars-checkbox"
+              label="Lower-case"
+              value={includeLowercaseChars}
+              onChange={this.handleCheckboxChange('includeLowercaseChars')}
+            />
+            <Checkbox
+              name="include-numbers-checkbox"
+              label="Numbers"
+              value={includeNumbers}
+              onChange={this.handleCheckboxChange('includeNumbers')}
+            />
+            <Checkbox
+              name="include-special-chars-checkbox"
+              label="Special"
+              value={includeSpecialChars}
+              onChange={this.handleCheckboxChange('includeSpecialChars')}
+            />
             <button>
               Advanced Options
             </button>
