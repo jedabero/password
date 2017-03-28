@@ -16,7 +16,8 @@ class App extends Component {
     includeLowercaseChars: true,
     includeNumbers: true,
     includeSpecialChars: false,
-    passwordLength: 32
+    passwordLength: 32,
+    optionsDisplay: false
   };
 
   componentDidMount() {
@@ -29,6 +30,8 @@ class App extends Component {
   handleSelectChange = event => this.setState({passwordLength: parseInt(event.target.value, 10)});
 
   handleCheckboxChange = name => event => this.setState({[name]: event.target.checked});
+
+  handleAdvancedOptionsButtonClick = event => this.setState(prevState => ({optionsDisplay: !prevState.optionsDisplay}));
 
   generateRandomNum = max => {
     const crypto = window.crypto || window.msCrypto;
@@ -74,7 +77,8 @@ class App extends Component {
   render() {
     const {passwordLenghts} = this.props;
     const {
-      password, includeUppercaseChars, includeLowercaseChars, includeNumbers, includeSpecialChars, passwordLength
+      includeUppercaseChars, includeLowercaseChars, includeNumbers, includeSpecialChars,
+      password, passwordLength, optionsDisplay
     } = this.state;
     return (
       <div className="container">
@@ -100,7 +104,10 @@ class App extends Component {
           >
             {passwordLenghts.map(item => <option key={item} value={item}>{item}</option>)}
           </Select>
-          <div>
+          <button onClick={this.handleAdvancedOptionsButtonClick}>
+            Advanced Options
+          </button>
+          <div style={{display: optionsDisplay ? 'block' : 'none'}}>
             <Checkbox
               name="include-uppercase-chars-checkbox"
               label="Upper-case"
@@ -125,9 +132,6 @@ class App extends Component {
               value={includeSpecialChars}
               onChange={this.handleCheckboxChange('includeSpecialChars')}
             />
-            <button>
-              Advanced Options
-            </button>
           </div>
         </div>
       </div>
