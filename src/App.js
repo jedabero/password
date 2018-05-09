@@ -27,7 +27,7 @@ class App extends Component {
 
   handleButtonClick = event => this.setState(prevState => ({password: this.generatePassword(prevState)}));
 
-  handleSelectChange = event => this.setState({passwordLength: parseInt(event.target.value, 10)});
+  handleSelectChange = event => this.setState({passwordLength: window.parseInt(event.target.value, 10)});
 
   handleCheckboxChange = name => event => this.setState({[name]: event.target.checked});
 

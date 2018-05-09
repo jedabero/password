@@ -1,7 +1,8 @@
 /**
  * Created by jedabero on 27/03/17.
  */
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const Select = ({name, label, value, onChange, children, inputStyle, labelStyle, ...props}) => (
   <div {...props}>
