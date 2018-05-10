@@ -1,8 +1,28 @@
 import React, { Component } from 'react';
+import Button from 'material-ui/Button';
+import { InputAdornment } from 'material-ui/Input';
+import { MenuItem } from 'material-ui/Menu';
+import TextField from 'material-ui/TextField';
+import Typography from 'material-ui/Typography';
+import { withStyles } from 'material-ui/styles';
 
-import './App.css';
+import withMUIRoot from './withMUIRoot';
 import Checkbox from "./components/Checkbox";
 import Select from "./components/Select";
+
+const styles = theme => ({
+  selectFormControl: {
+    margin: theme.spacing.unit,
+    minWidth: 128,
+  },
+  passwordTextField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+  },
+  button: {
+    margin: theme.spacing.unit,
+  },
+});
 
 class App extends Component {
 
@@ -16,7 +36,7 @@ class App extends Component {
     includeLowercaseChars: true,
     includeNumbers: true,
     includeSpecialChars: false,
-    passwordLength: 32,
+    passwordLength: 12,
     optionsDisplay: false
   };
 
@@ -75,38 +95,54 @@ class App extends Component {
   };
 
   render() {
-    const {passwordLenghts} = this.props;
+    const {classes, passwordLenghts} = this.props;
     const {
       includeUppercaseChars, includeLowercaseChars, includeNumbers, includeSpecialChars,
       password, passwordLength, optionsDisplay
     } = this.state;
     return (
       <div className="container">
-        <h1>Secure Password Generator</h1>
+        <Typography variant="headline" component="h1">Secure Password Generator</Typography>
         <div className="info">
-          <p>
+          <Typography component="p">
             Use this online tool to generate a strong and random password. The available characters in each set are user
             friendly - there are no ambiguous characters such as i, l, 1, o, 0, etc. Password generation is done on the
             client-side meaning no one has access to the passwords you generate here.
-          </p>
+          </Typography>
         </div>
         <div>
-          <div>
-            <label htmlFor="password-input">Secure Password:</label>
-            <input type="text" id="password-input" readOnly value={password}/>
-            <button onClick={this.handleButtonClick}>Generate another</button>
-          </div>
+          <TextField
+            id="password-input"
+            name="password-input"
+            label="Secure Password"
+            className={classes.passwordTextField}
+            margin="normal"
+            readOnly
+            value={password}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Button className={classes.button} onClick={this.handleButtonClick}>
+                    Generate another
+                  </Button>
+                </InputAdornment>
+              )
+            }}
+          />
+          <br />
           <Select
+            className={classes.selectFormControl}
             name="password-length"
             label="Password Length:"
             value={passwordLength}
             onChange={this.handleSelectChange}
           >
-            {passwordLenghts.map(item => <option key={item} value={item}>{item}</option>)}
+            {passwordLenghts.map(item => <MenuItem key={item} value={item}>{item}</MenuItem>)}
           </Select>
-          <button onClick={this.handleAdvancedOptionsButtonClick}>
+          <br />
+          <Button variant="raised" color="primary" onClick={this.handleAdvancedOptionsButtonClick}>
             Advanced Options
-          </button>
+          </Button>
           <div style={{display: optionsDisplay ? 'block' : 'none'}}>
             <Checkbox
               name="include-uppercase-chars-checkbox"
@@ -139,4 +175,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withMUIRoot(withStyles(styles)(App));

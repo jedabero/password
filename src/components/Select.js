@@ -3,20 +3,26 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { InputLabel } from 'material-ui/Input';
+import { FormControl } from 'material-ui/Form';
+import Select from 'material-ui/Select';
 
-const Select = ({name, label, value, onChange, children, inputStyle, labelStyle, ...props}) => (
-  <div {...props}>
-    {label && <label htmlFor={name} style={labelStyle}>{label}</label>}
-    <select
-      id={name}
+const CustomSelect = ({name, label, value, onChange, children, inputStyle, labelStyle, ...props}) => (
+  <FormControl {...props}>
+    {label && <InputLabel htmlFor={name} style={labelStyle}>{label}</InputLabel>}
+    <Select
       name={name}
+      inputProps={{
+        name,
+        id: name,
+      }}
       value={value}
       onChange={onChange}
       style={inputStyle}
     >
       {children}
-    </select>
-  </div>
+    </Select>
+  </FormControl>
 );
 
 Select.propTypes = {
@@ -30,4 +36,4 @@ Select.propTypes = {
   style: PropTypes.object,
 };
 
-export default Select;
+export default CustomSelect;

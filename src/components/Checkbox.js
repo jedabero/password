@@ -3,20 +3,26 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
+import Checkbox from 'material-ui/Checkbox';
+import { FormControlLabel } from 'material-ui/Form';
 
-const Checkbox = ({name, label, value, onChange, inputStyle, ...props}) => (
-  <label htmlFor={name} {...props}>
-    <input
-      type="checkbox"
-      id={name}
-      checked={value}
-      style={inputStyle}
-      onChange={onChange}
-    /> {label}
-  </label>
+const CustomCheckbox = ({name, label, value, onChange, inputStyle, ...props}) => (
+  <FormControlLabel
+    control={
+      <Checkbox
+        checked={value}
+        style={inputStyle}
+        onChange={onChange}
+        value={name}
+        color="primary"
+      />
+    }
+    label={label}
+    {...props}
+  />
 );
 
-Checkbox.propTypes = {
+CustomCheckbox.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string,
   value: PropTypes.any,
@@ -25,4 +31,4 @@ Checkbox.propTypes = {
   style: PropTypes.object,
 };
 
-export default Checkbox;
+export default CustomCheckbox;
